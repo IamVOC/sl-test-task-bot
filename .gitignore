@@ -7,5 +7,5 @@ poetry.lock
 .env
 
 # Pytest
-pytest_cache/
+.pytest_cache/
 .coverage
