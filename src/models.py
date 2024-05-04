@@ -8,7 +8,7 @@ class BaseModel(DeclarativeBase):
     ...
 
 
-class PreparedMessages(BaseModel):
+class PreparedMessage(BaseModel):
     __tablename__ = 'prepared_messages'
 
     message_id: Mapped[str] = mapped_column(primary_key=True, index=True)
@@ -24,7 +24,6 @@ class User(BaseModel):
 class SettingType(Enum):
     weather = 'weather'
     news = 'news'
-    jokes = 'jokes'
 
 
 class UserSetting(BaseModel):
