@@ -14,7 +14,7 @@ class GetNewsService:
         url = f'{self._settings.NEWS_API_URL}?q={source}&pageSize=1&page=1&apiKey={self._settings.NEWS_API_KEY}'
         async with self._session.get(url) as resp:
             response = await resp.json()
-        if response:
+        if response['articles']:
             answer = f"{response['articles'][0]['title']}\n{response['articles'][0]['url']}"
             return answer
         else:

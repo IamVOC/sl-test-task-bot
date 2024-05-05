@@ -15,6 +15,11 @@ DB_USER=<пользователь базы данных PostgreSQL>
 DB_PASS=<пароль пользователя базы данных>
 DB_NAME=<название базы данных PostgreSQL>
 TOKEN=<token бота Telegram>
+WEATHER_API_URL=<URL WeatherAPI (https://api.weatherapi.com/v1/current.json)>
+WEATHER_API_KEY=<API KEY WeatherAPI>
+NEWS_API_URL=<URL NewsAPI (https://newsapi.org/v2/everything)>
+NEWS_API_KEY=<API KEY NewsAPI>
+JOKE_API_URL=<URL JokesAPI (https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw)>
 ```
 2. Установите зависимости
 ```bash
