@@ -34,3 +34,14 @@ def get_weather_keyboard():
     builder.adjust(2, 1)
 
     return builder.as_markup()
+
+
+@lru_cache
+def get_news_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.button(text='tesla')
+    builder.button(text='apple')
+    builder.button(text='Выйти')
+    builder.adjust(2, 1)
+
+    return builder.as_markup()
