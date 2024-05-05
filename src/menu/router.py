@@ -12,7 +12,8 @@ from src.menu.service import UserService
 from src.keyboard import (
         get_menu_keyboard,
         get_settings_keyboard,
-        get_weather_keyboard
+        get_weather_keyboard,
+        get_news_keyboard
     )
 
 
@@ -61,7 +62,7 @@ async def handle_news_input(message: Message, state: FSMContext) -> None:
         else:
             response = await service.get_start_message('news_decline')
     if response:
-        await message.answer(response, reply_markup=get_menu_keyboard())
+        await message.answer(response, reply_markup=get_news_keyboard())
     if not blocked:
         await state.set_state(Navigation.news)
 
