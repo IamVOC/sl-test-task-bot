@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     WEATHER_API_KEY: str
     NEWS_API_URL: str
     NEWS_API_KEY: str
+    JOKE_API_URL: str
 
     @property
     def DB_URL(self) -> str:

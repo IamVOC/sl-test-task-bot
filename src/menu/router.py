@@ -3,12 +3,14 @@ from aiogram import F
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
+from aiohttp import ClientSession
 
+from src.config import settings
 from src.fsm import Navigation
 from src.db import async_session
 from src.service import GetStartMessageService
 from src.service import GetSettingService
-from src.menu.service import UserService
+from src.menu.service import UserService, GetJokeService
 from src.keyboard import (
         get_menu_keyboard,
         get_settings_keyboard,
@@ -41,11 +43,13 @@ async def handle_weather_input(message: Message, state: FSMContext) -> None:
         service = GetStartMessageService(s)
         if not blocked:
             response = await service.get_start_message('weather')
+            reply = get_weather_keyboard()
         else:
             response = await service.get_start_message('weather_decline')
+            reply = get_menu_keyboard()
 
     if response:
-        await message.answer(response, reply_markup=get_weather_keyboard())
+        await message.answer(response, reply_markup=reply)
     if not blocked:
         await state.set_state(Navigation.weather)
 
@@ -59,12 +63,24 @@ async def handle_news_input(message: Message, state: FSMContext) -> None:
         service = GetStartMessageService(s)
         if not blocked:
             response = await service.get_start_message('news')
+            reply = get_news_keyboard()
         else:
             response = await service.get_start_message('news_decline')
+            reply = get_menu_keyboard()
+
     if response:
-        await message.answer(response, reply_markup=get_news_keyboard())
+        await message.answer(response, reply_markup=reply)
     if not blocked:
         await state.set_state(Navigation.news)
+
+
+@router.message(Navigation.menu, F.text == 'Шутка')
+async def get_joke(message: Message, state: FSMContext) -> None:
+    async with ClientSession() as s:
+        service = GetJokeService(s, settings)
+        response = await service.get_joke()
+    if response:
+        await message.answer(response)
 
 
 @router.message(Navigation.menu, F.text == 'Настройки')
