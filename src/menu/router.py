@@ -9,7 +9,11 @@ from src.db import async_session
 from src.service import GetStartMessageService
 from src.service import GetSettingService
 from src.menu.service import UserService
-from src.keyboard import get_menu_keyboard, get_settings_keyboard
+from src.keyboard import (
+        get_menu_keyboard,
+        get_settings_keyboard,
+        get_weather_keyboard
+    )
 
 
 router = Router()
@@ -40,7 +44,7 @@ async def handle_weather_input(message: Message, state: FSMContext) -> None:
             response = await service.get_start_message('weather_decline')
 
     if response:
-        await message.answer(response, reply_markup=get_menu_keyboard())
+        await message.answer(response, reply_markup=get_weather_keyboard())
     if not blocked:
         await state.set_state(Navigation.weather)
 

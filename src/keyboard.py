@@ -23,3 +23,14 @@ def get_settings_keyboard():
     builder.adjust(2, 1)
 
     return builder.as_markup()
+
+
+@lru_cache
+def get_weather_keyboard():
+    builder = ReplyKeyboardBuilder()
+    builder.button(text='Омск')
+    builder.button(text='Дубай')
+    builder.button(text='Выйти')
+    builder.adjust(2, 1)
+
+    return builder.as_markup()
